@@ -1,57 +1,48 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww51000\viewh25900\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+Sub SaveEmails()
 
-\f0\fs24 \cf0 \
-Sub SaveEmails()\
-\
-' SaveEmails Macro\
- \
-Dim oMail As Outlook.MailItem\
-    Dim objItem As Object\
-    Dim sPath, strFolderpath As String\
-    Dim dtDate As Date\
-    Dim sName As String\
-    Dim enviro As String\
-    Dim fName As String\
-    Dim tName As String\
-    Dim ffName, fffName, ffffName As String\
-   \
-    Dim i As Integer\
-   \
-    enviro = CStr(Environ("USERPROFILE"))\
-\
- \
-    strFolderpath = "\\\\ent.wfb.bank.corp\\CTS_DFS\\CDO\\CDO - Columbia\\Teams\\4086 Team\\Settled Trades"\
-    sPath = strFolderpath & "\\"\
- \
-    For Each objItem In ActiveExplorer.Selection\
-        If objItem.MessageClass = "IPM.Note" Then\
-            Set oMail = objItem\
-            sName = oMail.Subject\
-        \
-            tName = Replace(sName, ":", " ") \
-            \
-            fName = Replace(tName, "/", " ")\
-            ffName = Replace(fName, "*", " ")\
-            fffName = Replace(ffName, "(", " ")\
-           \
-            ffffName = Replace(fffName, ")", " ")\
-           \
-            dtDate = oMail.ReceivedTime\
-           \
-                      \
-            Debug.Print sPath & fName\
-           \
-            oMail.SaveAs sPath & Format(dtDate, "mm.dd.yyyy ", vbUseSystemDayOfWeek, _\
-            vbUseSystem) & ffffName & ".msg", olMSG\
-           \
-         End If\
-    Next\
- \
- \
-End Sub\
- }
+
+ Dim oMail As Outlook.MailItem
+    Dim objItem As Object
+    Dim sPath, strFolderpath As String
+    Dim dtDate As Date
+    Dim sName As String
+    Dim enviro As String
+    Dim fName As String
+    Dim tName As String
+    Dim ffName, fffName, ffffName As String
+    
+    Dim i As Integer
+    
+    enviro = CStr(Environ("USERPROFILE"))
+
+
+    strFolderpath = "\\ent.wfb.bank.corp\CTS_DFS\CDO\CDO - Columbia\Teams\4086 Team\Pending Trades"
+    sPath = strFolderpath & "\"
+
+    For Each objItem In ActiveExplorer.Selection
+        If objItem.MessageClass = "IPM.Note" Then
+            Set oMail = objItem
+            sName = oMail.Subject
+         
+            tName = Replace(sName, ":", " ")
+            
+            fName = Replace(tName, "/", " ")
+            ffName = Replace(fName, "*", " ")
+            fffName = Replace(ffName, "(", " ")
+            
+            ffffName = Replace(fffName, ")", " ")
+            
+            dtDate = oMail.ReceivedTime
+            
+          
+              
+            Debug.Print sPath & fName
+            
+            oMail.SaveAs sPath & Format(dtDate, "mm.dd.yyyy ", vbUseSystemDayOfWeek, _
+            vbUseSystem) & ffffName & ".msg", olMSG
+            
+         End If
+    Next
+
+
+End Sub
